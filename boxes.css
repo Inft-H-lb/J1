@@ -46,21 +46,21 @@
     border-color: rgb(65, 48, 80);
 }
 .inner_box_shadow_purple{
-    box-shadow: inset 0 0 3cqmax rgba(65, 48, 80, 1);
+    box-shadow: inset 0 0 3vmin rgba(65, 48, 80, 1);
 }
 
 .border_red{
     border-color: rgb(110, 25, 25);
 }
 .inner_box_shadow_red{
-    box-shadow: inset 0 0 3cqmax rgba(110, 25, 25, 0.9);
+    box-shadow: inset 0 0 3vmin rgba(110, 25, 25, 0.9);
 }
 
 .border_blue{
     border-color: rgb(60, 105, 160);
 }
 .inner_box_shadow_blue{
-    box-shadow: inset 0 0 3cqmax rgba(60, 105, 160, 0.9);
+    box-shadow: inset 0 0 3vmin rgba(60, 105, 160, 0.9);
 }
 
 
@@ -70,4 +70,9 @@
 
 .half_extend{
     width: 50%;
+}
+
+
+.rounded_corners{
+    border-radius: 10px;
 }
