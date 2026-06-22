@@ -1,70 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./boxes.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Squada+One&display=swap" rel="stylesheet">
-
+    <title>ZS-040 Bluetooth Test</title>
 </head>
 <body>
+
+    <h1>Bluetooth ZS-040 Steuerung</h1>
     
-    <div class="box border_white inner_box_shadow_blue">
-        <h1>HALLO</h1>
+    <button onclick="connectBluetooth()">1. Mit Bluetooth-Modul verbinden</button>
+    <hr>
+
+    <h3>Daten senden:</h3>
+    <button onclick="send_message(65)">Sende Byte 65 (Buchstabe 'A')</button>
+    <button onclick="send_message(66)">Sende Byte 66 (Buchstabe 'B')</button>
+    <hr>
+
+    <h3>Empfangene Daten (Live):</h3>
+    <div id="output" style="padding: 10px; background: #eee; min-height: 50px;">
+        Noch keine Daten empfangen.
     </div>
 
-    <div class="container full_extend">
-        <div class="box inner_box_shadow_purple half_extend">
-            <h4>
-                Test
-            </h4>
+    <script>
+        // --- HIER FÜGST DU DEN JS-CODE VON OBEN EIN ---
+        let port;
+        let writer;
+        let reader;
+        let keepReading = true;
 
-            <div class="text_box border_red">
-                Neunundneunzig Luftballons auf  
-                ihrem Weg zum Horizont hielt man 
-                für Ufos aus dem All
-            </div>
-        </div>
+        async function connectBluetooth() {
+          try {
+            port = await navigator.serial.requestPort();
+            await port.open({ baudRate: 9600 });
+            writer = port.writable.getWriter();
+            document.getElementById("output").innerText = "Verbunden! Warte auf Daten...";
+            startReading();
+          } catch (error) {
+            document.getElementById("output").innerText = "Fehler: " + error;
+          }
+        }
 
-        <div class="box border_white inner_box_shadow_red half_extend">
-            <h2>
-                BLAU
-            </h2>
-        </div>
+        async function send_message(datenbyte) {
+          if (!writer) return;
+          const data = new Uint8Array([datenbyte]);
+          await writer.write(data);
+        }
 
-        <div class="box border_blue inner_box_shadow_blue half_extend">
-            <h2>
-                GELB
-            </h2>
-        </div>
+        async function startReading() {
+          while (port.readable && keepReading) {
+            reader = port.readable.getReader();
+            try {
+              while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                if (value) {
+                  for (let i = 0; i < value.length; i++) {
+                    read_message(value[i]);
+                  }
+                }
+              }
+            } catch (error) {
+              console.error(error);
+            } finally {
+              reader.releaseLock();
+            }
+          }
+        }
 
-        <div class="box border_white half_extend rounded_corners">
-            <h2>
-                FARBIG
-            </h2>
-        </div>
-
-        <div class="box border_purple half_extend">
-            <h2>
-                INFRAROT
-            </h2>
-        </div>
-
-        <div class="text_box border_blue half_extend">
-            <h2>
-                9
-            </h2>
-        </div>
-
-    </div>
-
-
-    
-
+        // DEINE EMPFANGS-FUNKTION:
+        function read_message(datenbyte) {
+          // Schreibt das empfangene Byte direkt auf die Website
+          const outputDiv = document.getElementById("output");
+          outputDiv.innerHTML += `<br>Byte empfangen: <b>${datenbyte}</b>`;
+        }
+    </script>
 </body>
 </html>
