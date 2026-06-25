@@ -2,77 +2,272 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>ZS-040 Bluetooth Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutiger Aero Experience</title>
+    <style>
+        /* --- Globale Stile & Hintergrund --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            /* Typischer Frutiger Aero Verlauf: Aurora-Glow, Blau und Grün */
+            background: radial-gradient(circle at 80% 20%, #c1ebd0 0%, #a1dbf1 40%, #2575fc 80%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #222;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtile Wassertropfen/Blasen im Hintergrund */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6) 1px, transparent 1px),
+                radial-gradient(circle at 75% 60%, rgba(255,255,255,0.4) 2px, transparent 2px),
+                radial-gradient(circle at 50% 80%, rgba(255,255,255,0.5) 4px, transparent 4px);
+            background-size: 100px 100px;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* --- Header & Navigation (Skeuomorph / Glas-Effekt) --- */
+        header {
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(240, 240, 240, 0.4) 50%, rgba(255, 255, 255, 0.3) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #005bb5;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Das typische "Eco-Element": Ein grünes Blatt/Kreis im Logo */
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #a8ff78, #78ffd6);
+            border-radius: 50% 0 50% 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2), inset -2px -2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        /* Hover-Effekt wie bei Windows Vista/7 Schaltflächen */
+        nav a:hover {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.2) 50%, rgba(200,230,255,0.4) 50%, rgba(255,255,255,0.5) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 8px rgba(0, 91, 181, 0.2);
+            color: #004488;
+        }
+
+        /* --- Hauptinhalt --- */
+        main {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            color: #004b93;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.6);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* Hochglanz-Button */
+        .btn-glass {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            background: linear-gradient(to bottom, #56ab2f 0%, #a8ff78 4%, #56ab2f 50%, #469c20 50%, #3b8717 100%);
+            border: 1px solid #3b8717;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(86, 171, 47, 0.4), inset 0 1px 0 rgba(255,255,255,0.5);
+            text-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+
+        .btn-glass:hover {
+            filter: brightness(1.05);
+            box-shadow: 0 6px 20px rgba(86, 171, 47, 0.6), inset 0 1px 0 rgba(255,255,255,0.6);
+        }
+
+        .btn-glass:active {
+            transform: translateY(1px);
+        }
+
+        /* Feature Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 12px 25px rgba(0, 91, 181, 0.15);
+        }
+
+        /* Runder, glänzender Icon-Container */
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00b4db, #0083b0);
+            border-radius: 50%;
+            margin-bottom: 15px;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .card h3 {
+            color: #005bb5;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 60px;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            background: rgba(0, 68, 136, 0.2);
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Bluetooth ZS-040 Steuerung</h1>
-    
-    <button onclick="connectBluetooth()">1. Mit Bluetooth-Modul verbinden</button>
-    <hr>
+    <header>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            AeroSphere
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Startseite</a></li>
+                <li><a href="#">Technologie</a></li>
+                <li><a href="#">Umwelt</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <h3>Daten senden:</h3>
-    <button onclick="send_message(65)">Sende Byte 65 (Buchstabe 'A')</button>
-    <button onclick="send_message(66)">Sende Byte 66 (Buchstabe 'B')</button>
-    <hr>
+    <main>
+        <section class="hero">
+            <h1>Die Zukunft ist klar und lebendig</h1>
+            <p>Willkommen in einer Welt voller Transparenz, dynamischer Kurven und erfrischender Technologie. Erleben Sie das digitale Lebensgefühl der Jahrtausendwende im modernen Gewand.</p>
+            <button class="btn-glass">Jetzt entdecken</button>
+        </section>
 
-    <h3>Empfangene Daten (Live):</h3>
-    <div id="output" style="padding: 10px; background: #eee; min-height: 50px;">
-        Noch keine Daten empfangen.
-    </div>
+        <section class="grid">
+            <div class="card">
+                <div class="card-icon">💧</div>
+                <h3>Aqua Interface</h3>
+                <p>Flüssige Übergänge, glänzende Oberflächen und organische Texturen, die an klares Wasser und frischen Tau erinnern.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌱</div>
+                <h3>Eco-Futurismus</h3>
+                <p>Die harmonische Verschmelzung von modernster Technologie und strahlend grüner Natur. Nachhaltig gedacht, elegant umgesetzt.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💿</div>
+                <h3>Aero Glass</h3>
+                <p>Tiefenwirkung durch semitransparente Ebenen und weichgezeichnete Hintergründe – inspiriert von den besten Betriebssystemen der Ära.</p>
+            </div>
+        </section>
+    </main>
 
-    <script>
-        // --- HIER FÜGST DU DEN JS-CODE VON OBEN EIN ---
-        let port;
-        let writer;
-        let reader;
-        let keepReading = true;
+    <footer>
+        &copy; 2008 - 2026 AeroSphere Corporation. Alle Rechte vorbehalten.
+    </footer>
 
-        async function connectBluetooth() {
-          try {
-            port = await navigator.serial.requestPort();
-            await port.open({ baudRate: 9600 });
-            writer = port.writable.getWriter();
-            document.getElementById("output").innerText = "Verbunden! Warte auf Daten...";
-            startReading();
-          } catch (error) {
-            document.getElementById("output").innerText = "Fehler: " + error;
-          }
-        }
-
-        async function send_message(datenbyte) {
-          if (!writer) return;
-          const data = new Uint8Array([datenbyte]);
-          await writer.write(data);
-        }
-
-        async function startReading() {
-          while (port.readable && keepReading) {
-            reader = port.readable.getReader();
-            try {
-              while (true) {
-                const { value, done } = await reader.read();
-                if (done) break;
-                if (value) {
-                  for (let i = 0; i < value.length; i++) {
-                    read_message(value[i]);
-                  }
-                }
-              }
-            } catch (error) {
-              console.error(error);
-            } finally {
-              reader.releaseLock();
-            }
-          }
-        }
-
-        // DEINE EMPFANGS-FUNKTION:
-        function read_message(datenbyte) {
-          // Schreibt das empfangene Byte direkt auf die Website
-          const outputDiv = document.getElementById("output");
-          outputDiv.innerHTML += `<br>Byte empfangen: <b>${datenbyte}</b>`;
-        }
-    </script>
 </body>
 </html>
