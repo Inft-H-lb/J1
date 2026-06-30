@@ -89,6 +89,7 @@
 }
 
 .icon{
+    border-radius: 5vmin;
     border-radius: 5cqmin;
     padding-top: 1vmin;
     padding-bottom: 1vmin;
