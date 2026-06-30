@@ -1,0 +1,158 @@
+:root{
+    --slider_height: 1.5cqh;
+}
+
+.waterdrop{
+    background-color: rgba(255, 255, 255, 0.01);
+
+    backdrop-filter: blur(3px);
+
+    text-align: center;
+    color: rgb(35, 95, 151);
+
+    box-shadow: 
+        inset -3px 0px 10px rgba(255, 255, 255, 0.1),
+        inset 0px 5px 10px rgba(255, 255, 255, 0.1);
+
+    font-size: x-large;
+}
+
+.glass{
+    background-color: rgba(190, 240, 255, 0.05);
+
+    backdrop-filter: blur(3px);
+
+    text-align: center;
+    color: rgb(35, 95, 151);
+
+    box-shadow: 
+        inset -7px 0px 10px rgba(255, 255, 255, 0.200),
+        inset 0px 10px 10px rgba(255, 255, 255, 0.200);
+}
+
+.invisible_glass{
+
+    text-align: center;
+    color: rgb(35, 95, 151);
+
+    font-size: x-large;
+}
+
+
+.invisible_glass:hover{
+    background-color: rgba(255, 255, 255, 0.01);
+
+    backdrop-filter: blur(3px);
+
+    text-align: center;
+    color: rgb(35, 95, 151);
+
+    box-shadow: 
+        inset -3px 0px 10px rgba(255, 255, 255, 0.1),
+        inset 0px 5px 10px rgba(255, 255, 255, 0.1);
+
+    font-size: x-large;
+}
+
+.red_glass{
+    background-color: rgba(120, 50, 50, 0.664);
+
+    backdrop-filter: blur(10px);
+
+    text-align: center;
+    color: rgb(121, 127, 133);
+
+    box-shadow: 
+        inset -3px 0px 10px rgba(150, 25, 25, 0.6),
+        inset 0px 5px 10px rgba(150, 25, 25, 0.6);
+
+    font-size: x-large;
+}
+
+.green_glass{
+    background-color: rgba(67, 122, 69, 0.664);
+
+    backdrop-filter: blur(10px);
+
+    text-align: center;
+    color: rgb(121, 127, 133);
+
+    box-shadow: 
+        inset -3px 0px 10px rgba(100, 175, 100, 0.6),
+        inset 0px 5px 10px rgba(100, 175, 100, 0.6);
+
+    font-size: x-large;
+}
+
+.red_glass:hover, .green_glass:hover{
+    filter: brightness(0.75) contrast(1.1);
+}
+
+.icon{
+    border-radius: 5cqmin;
+    padding-top: 1vmin;
+    padding-bottom: 1vmin;
+    padding-left: 3vmin;
+    padding-right: 3vmin;
+
+    margin: 5px;
+
+    min-height: 1vh;
+    width: fit-content;
+}
+
+.frame{
+    border-radius: 5vmin;
+    padding: 1vmin;
+
+    min-height: 20vmin;
+}
+
+.ground{
+    width: 33%;
+    align-content: center;
+    justify-content: center;
+
+    align-self: center;
+    justify-self: center;
+}
+
+.icon, .frame{
+    font-family: "Squada One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.aero_slider{
+    appearance: none;
+    
+    background-image: linear-gradient(to right, #c23a3a, #eb9b4b, #ebe34b, #70bf5a, #4ba6eb);
+
+    border-radius: 999px;
+    min-height: 5px;
+    max-height: 15px;
+    height: 1.5vh;
+    height: var(--slider_height);
+    width: 100%;
+}
+
+.aero_slider::-webkit-slider-thumb{
+    appearance: none;
+
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(3px);
+    box-shadow: 
+        inset -3px 0px 10px rgba(255, 255, 255, 0.1),
+        inset 0px 5px 10px rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+
+    height: 2vh;
+    width: 2vh;
+    height: calc(var(--slider_height) * 1.5);
+    width: calc(var(--slider_height) * 1.5);
+
+    cursor: pointer;
+}
+
+
+
